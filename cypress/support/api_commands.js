@@ -55,9 +55,11 @@ Cypress.Commands.add('api_getAllProjects', () => {
 Cypress.Commands.add('api_deleteAllProjects', () => {
     cy.api_getAllProjects()
       .then(response => {
-        response.body.forEach(element => {
-            cy.api_deleteProject(element.id)
-        });
+        if (response.body > 0) {
+            response.body.forEach(element => {
+                cy.api_deleteProject(element.id)
+            });
+        }
       })
 })
 
